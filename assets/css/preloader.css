@@ -1,0 +1,91 @@
+/* ...existing code... */
+
+/* Fullscreen preloader base */
+.dp-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background: #000;
+  overflow: hidden;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Site name centered */
+.dp-site-name {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.dp-site-name span {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight: 800;
+  font-size: clamp(36px, 7vw, 96px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dp-preloader-accent, #ffffff);
+}
+
+/* gutters container */
+.dp-preloader-gutters {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+}
+
+/* each bar column */
+.dp-preloader-gutters .dp-bar {
+  width: 12.5%; /* eight columns */
+  height: 100%;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* inner colored bar that animates width */
+.dp-inner-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  /* Solid color using the configured accent variable */
+  background: var(--dp-preloader-accent, #ffffff);
+  will-change: width;
+}
+
+/* overlay that slides in at the end */
+.dp-preloader-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #000;
+  transform: translateX(-100%);
+}
+
+/* Hide preloader when removed by JS */
+.dp-preloader.hidden {
+  display: none !important;
+}
+
+/* accessibility helper when hidden (JS toggles) */
+.dp-preloader[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+/* small screens adjustments */
+@media (max-width: 640px) {
+  .dp-preloader-gutters .dp-bar { width: 25%; } /* fewer bars visible per viewport width */
+  .dp-site-name span { font-size: clamp(24px, 10vw, 48px); }
+}
+
+/* page animation */
+
